@@ -3,23 +3,89 @@
 <html>
   <head>
     <title>Color Game</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Potta+One&family=Yusei+Magic&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <link rel="stylesheet" href="./index.css" />
   </head>
+
   <body onload="newGame()">
     <div id="header">
       <h2>The Great</h2>
       <h1 id="header-clue">rgb(xxx,xxx,xxx)</h1>
       <h2>Guessing Game</h2>
     </div>
+
+    <div id="Navigator">
+      <div id="NG">New Game</div>
+      <div id="Result"></div>
+      <div id="Rules">How to Play</div>
+      <span id="hide">
+        <ul>
+          <li>
+            The RGB (Red-Green-Blue) color code of a color is given above.
+          </li>
+          <li>Guess that color from the below given colors.</li>
+          <li>If the guess is correct, Every color changes to that color.</li>
+          <li>
+            If the guess is incorrect, the selected color changes to Black.
+          </li>
+        </ul>
+      </span>
+    </div>
+
+    <div id="Tries">
+      Number of Tries :
+      <div id="NT" style="padding: 5px">0</div>
+    </div>
+
     <div id="container">
-      <div class="tile" id="1"></div>
-      <div class="tile" id="2"></div>
+      <div id="FirstRow">
+        <div class="tile" id="1"></div>
+        <div class="tile" id="2"></div>
+        <div class="tile" id="3"></div>
+      </div>
+      <div id="SecondRow">
+        <div class="tile" id="4"></div>
+        <div class="tile" id="5"></div>
+        <div class="tile" id="6"></div>
+      </div>
+    </div>
+
+    <div id="Footer">
+      <div class="Socials">
+        <a href="https://www.instagram.com/hemantprakash10/" target="_blank"
+          ><i class="fa fa-instagram"></i
+        ></a>
+        <a href="https://www.facebook.com/hemant.prakash.169/" target="_blank"
+          ><i class="fa fa-facebook-official"></i
+        ></a>
+        <a
+          href="https://www.linkedin.com/in/hemant-prakash-singh-494746173/"
+          target="_blank"
+          ><i class="fa fa-linkedin-square"></i
+        ></a>
+      </div>
+      <span>Hemant Prakash Singh</span>
     </div>
 
     <script>
       var t1 = document.getElementById("1");
       var t2 = document.getElementById("2");
-      var x;
+      var t3 = document.getElementById("3");
+      var t4 = document.getElementById("4");
+      var t5 = document.getElementById("5");
+      var t6 = document.getElementById("6");
+
+      var ng = document.getElementById("NG");
+
+      var x, y;
       var correctColor;
 
       function getRandomColor() {
@@ -31,14 +97,33 @@
         return color;
       }
 
+      ng.addEventListener("click", function () {
+        newGame();
+      });
+
       function newGame() {
+        document.getElementById("header").style.background = "rgb(255, 0, 76)";
+        document.getElementById("Result").innerHTML = "";
+
         t1.style.background = getRandomColor();
         t2.style.background = getRandomColor();
+        t3.style.background = getRandomColor();
+        t4.style.background = getRandomColor();
+        t5.style.background = getRandomColor();
+        t6.style.background = getRandomColor();
 
-        x = Math.floor(Math.random() * 2 + 1);
+        x = Math.floor(Math.random() * 6 + 1);
+        y = 0;
+
+        document.getElementById("NT").innerHTML = y;
 
         if (x == 1) correctColor = t1.style.background;
-        else correctColor = t2.style.background;
+        else if (x == 2) correctColor = t2.style.background;
+        else if (x == 3) correctColor = t3.style.background;
+        else if (x == 4) correctColor = t4.style.background;
+        else if (x == 5) correctColor = t5.style.background;
+        else correctColor = t6.style.background;
+
         /* console.log(x);
         console.log(correctColor); */
 
@@ -48,18 +133,114 @@
       t1.addEventListener("click", function () {
         if (t1.style.background == correctColor) {
           t2.style.background = correctColor;
+          t3.style.background = correctColor;
+          t4.style.background = correctColor;
+          t5.style.background = correctColor;
+          t6.style.background = correctColor;
           document.getElementById("header").style.background = correctColor;
+          document.getElementById("Result").innerHTML = "Correct!";
         } else {
-          t1.style.background = "black";
+          if (t1.style.background != "rgb(24, 22, 22)") {
+            y++;
+            document.getElementById("NT").innerHTML = y;
+          }
+          t1.style.background = "rgb(24, 22, 22)";
+          document.getElementById("Result").innerHTML = "Try Again";
         }
       });
 
       t2.addEventListener("click", function () {
         if (t2.style.background == correctColor) {
           t1.style.background = correctColor;
+          t3.style.background = correctColor;
+          t4.style.background = correctColor;
+          t5.style.background = correctColor;
+          t6.style.background = correctColor;
           document.getElementById("header").style.background = correctColor;
+          document.getElementById("Result").innerHTML = "Correct!";
         } else {
-          t2.style.background = "black";
+          if (t2.style.background != "rgb(24, 22, 22)") {
+            y++;
+            document.getElementById("NT").innerHTML = y;
+          }
+          t2.style.background = "rgb(24, 22, 22)";
+          document.getElementById("Result").innerHTML = "Try Again";
+        }
+      });
+
+      t3.addEventListener("click", function () {
+        if (t3.style.background == correctColor) {
+          t1.style.background = correctColor;
+          t2.style.background = correctColor;
+          t4.style.background = correctColor;
+          t5.style.background = correctColor;
+          t6.style.background = correctColor;
+          document.getElementById("header").style.background = correctColor;
+          document.getElementById("Result").innerHTML = "Correct!";
+        } else {
+          if (t3.style.background != "rgb(24, 22, 22)") {
+            y++;
+            document.getElementById("NT").innerHTML = y;
+          }
+          t3.style.background = "rgb(24, 22, 22)";
+          document.getElementById("Result").innerHTML = "Try Again";
+        }
+      });
+
+      t4.addEventListener("click", function () {
+        if (t4.style.background == correctColor) {
+          t1.style.background = correctColor;
+          t2.style.background = correctColor;
+          t3.style.background = correctColor;
+          t5.style.background = correctColor;
+          t6.style.background = correctColor;
+          document.getElementById("header").style.background = correctColor;
+          document.getElementById("Result").innerHTML = "Correct!";
+        } else {
+          if (t4.style.background != "rgb(24, 22, 22)") {
+            y++;
+            document.getElementById("NT").innerHTML = y;
+          }
+          t4.style.background = "rgb(24, 22, 22)";
+          document.getElementById("Result").innerHTML = "Try Again";
+        }
+      });
+
+      t5.addEventListener("click", function () {
+        if (t5.style.background == correctColor) {
+          t1.style.background = correctColor;
+          t2.style.background = correctColor;
+          t3.style.background = correctColor;
+          t4.style.background = correctColor;
+          t6.style.background = correctColor;
+          document.getElementById("header").style.background = correctColor;
+          document.getElementById("Result").innerHTML = "Correct!";
+        } else {
+          if (t5.style.background != "rgb(24, 22, 22)") {
+            y++;
+            document.getElementById("NT").innerHTML = y;
+          }
+          t5.style.background = "rgb(24, 22, 22)";
+          document.getElementById("Result").innerHTML = "Try Again";
+        }
+      });
+
+      t6.addEventListener("click", function () {
+        if (t6.style.background == correctColor) {
+          t1.style.background = correctColor;
+          t2.style.background = correctColor;
+          t3.style.background = correctColor;
+          t4.style.background = correctColor;
+          t5.style.background = correctColor;
+          document.getElementById("header").style.background = correctColor;
+          document.getElementById("Result").innerHTML = "Correct!";
+        } else {
+          if (t6.style.background != "rgb(24, 22, 22)") {
+            y++;
+            document.getElementById("NT").innerHTML = y;
+          }
+          t6.style.background = "rgb(24, 22, 22)";
+          document.getElementById("Result").innerHTML = "Try Again";
         }
       });
     </script>
